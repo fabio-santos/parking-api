@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:8.0
+    restart: always
+    environment:
+      - MYSQL_DATABASE=parking
+      - MYSQL_ROOT_PASSWORD=parking
+    ports:
+      - '3306:3306'
+  api:
+    build: .
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysql
+    links:
+      - mysql:app
