@@ -7,12 +7,12 @@ services:
       - MYSQL_DATABASE=parking
       - MYSQL_ROOT_PASSWORD=parking
     ports:
-      - '3306:3306'
+      - "3306:3306"
   api:
     build: .
     restart: always
     ports:
-      - 8080:8080
+      - "8080:8080"
     depends_on:
       - mysql
     links:

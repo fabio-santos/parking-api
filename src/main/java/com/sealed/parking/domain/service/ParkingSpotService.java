@@ -12,6 +12,7 @@ import com.sealed.parking.domain.vehicle.VehicleFactory;
 import com.sealed.parking.domain.vehicle.VehicleInterface;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +24,11 @@ public class ParkingSpotService {
     private ParkingSpotRepository repository;
     private VehicleFactory vehicleFactory;
     private VehicleService vehicleService;
+
+    public @ResponseBody
+    List<ParkingSpot> getParkedVehicles() {
+        return this.repository.findByVehicleIsNotNull();
+    }
 
     public void reset() {
         repository.deleteAll();
@@ -44,13 +50,9 @@ public class ParkingSpotService {
     public boolean isParkingLotFull() {
         ParkingDTO availableSpots = this.getAvailableSpots();
 
-        if(availableSpots.getCarSpots() > 0 ||
-                availableSpots.getMotorcycleSpots() > 0 ||
-                availableSpots.getVanSpots() > 0) {
-            return false;
-        }
-
-        return true;
+        return availableSpots.getCarSpots() <= 0 &&
+                availableSpots.getMotorcycleSpots() <= 0 &&
+                availableSpots.getVanSpots() <= 0;
     }
 
     public ParkingDTO getTakenSpots() {

@@ -9,12 +9,19 @@ import com.sealed.parking.domain.service.ParkingSpotService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/park")
 @AllArgsConstructor
 public class ParkingController {
 
     private ParkingSpotService service;
+
+    @GetMapping
+    public List<ParkingSpot> getParkedVehicles() {
+        return service.getParkedVehicles();
+    }
 
     @PostMapping
     public ParkingSpot park(@RequestBody Vehicle vehicle) throws VehicleNotMapped, NoSpotsAvailable, VehicleAlreadyParkedException {

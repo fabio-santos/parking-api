@@ -22,4 +22,6 @@ public interface ParkingSpotRepository extends JpaRepository<ParkingSpot, Long> 
     List<ParkingSpot> findBySpotTypeAndVehicleIsNull(VehicleType vehicleType, Pageable pageable);
 
     List<ParkingSpot> findByVehicleId(Long vehicle);
+
+    List<ParkingSpot> findByVehicleIsNotNull();
 }

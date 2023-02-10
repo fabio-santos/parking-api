@@ -17,7 +17,7 @@ public class ParkingSpot {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private int number;
@@ -25,6 +25,6 @@ public class ParkingSpot {
     @Enumerated(EnumType.STRING)
     private VehicleType spotType;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Vehicle vehicle;
 }
