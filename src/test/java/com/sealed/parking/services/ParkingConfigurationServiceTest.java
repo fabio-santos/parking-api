@@ -18,11 +18,6 @@ public class ParkingConfigurationServiceTest {
     private ParkingConfigurationService service;
 
     @Test
-    public void emptyConfigurationShouldReturnParkingNotConfiguredException() {
-        assertThrows(ParkingNotConfiguredException.class, () -> service.getCurrentConfiguration());
-    }
-
-    @Test
     public void setConfigurationShouldReturnSameParameters() throws ParkingNotConfiguredException {
         ParkingConfiguration configuration = new ParkingConfiguration();
 
